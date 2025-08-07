@@ -1,0 +1,32 @@
+Question 2
+
+ANSWER
+<?php
+echo "<h2>Division Table (1 to 3)</h2>";
+
+echo "<table border='1' cellspacing='0' cellpadding='10' style='border-collapse: collapse; text-align: center;'>";
+
+// Print header row (top row: 1, 2, 3)
+echo "<tr><th></th>";
+for ($col = 1; $col <= 3; $col++) {
+    echo "<th>$col</th>";
+}
+echo "</tr>";
+
+// Print table body
+for ($row = 1; $row <= 3; $row++) {
+    echo "<tr>";
+    echo "<th>$row</th>"; // Leftmost column (row header)
+    for ($col = 1; $col <= 3; $col++) {
+        $division = $row / $col;
+        $formatted = number_format($division, 2); // Format to 2 decimal places
+        echo "<td>$formatted</td>";
+    }
+    echo "</tr>";
+}
+
+echo "</table>";
+?>
+
+OUTPUT:
+output is in output screen
