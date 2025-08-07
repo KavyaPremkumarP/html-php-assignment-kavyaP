@@ -1,1 +1,35 @@
+Question 5:
+You are building a website where users can calculate the total cost of their purchases.
+Write a PHP program that takes the price and quantity of three items from the user and
+calculates the subtotal, tax (10% of the subtotal),and the total cost (subtotal + tax).
+Display the results to the user.
 
+ANSWER
+<?php
+// Prices and quantities for 3 items
+$price1 = 10.50;
+$qty1 = 2;
+
+$price2 = 5.75;
+$qty2 = 4;
+
+$price3 = 20.00;
+$qty3 = 1;
+
+// Calculate subtotal
+$subtotal = ($price1 * $qty1) + ($price2 * $qty2) + ($price3 * $qty3);
+
+// Calculate tax (10% of subtotal)
+$tax = $subtotal * 0.10;
+
+// Calculate total cost
+$total = $subtotal + $tax;
+
+// Display results
+echo "Subtotal: $" . number_format($subtotal, 2) . "\n";
+echo "Tax (10%): $" . number_format($tax, 2) . "\n";
+echo "Total Cost: $" . number_format($total, 2) . "\n";
+?>
+
+OUTPUT:
+Subtotal: $64.00 Tax (10%): $6.40 Total Cost: $70.40
