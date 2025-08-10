@@ -1,1 +1,32 @@
+Question18
+IsSet() function in PHP with example.
+
+
+ANSWER
+<?php
+$name = "John";
+if (isset($name)) {
+    echo "The variable \$name is set and not NULL.<br>";
+} else {
+    echo "The variable \$name is not set or is NULL.<br>";
+}
+$age = NULL;
+if (isset($age)) {
+    echo "The variable \$age is set.<br>";
+} else {
+    echo "The variable \$age is not set or is NULL.<br>";
+}
+$city = "New York";
+if (isset($name, $city)) {
+    echo "Both \$name and \$city are set.<br>";
+} else {
+    echo "One or more variables are not set.<br>";
+}
+?>
+
+
+OUTPUT:
+The variable $name is set and not NULL.
+The variable $age is not set or is NULL.
+Both $name and $city are set.
 
