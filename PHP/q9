@@ -1,1 +1,16 @@
+Question 9
+Predict the output of the following snippet:
+$this = “this”; $that = “that”; $the_other = 2.2000000000;
+print(“$this,$not_set,$that+$the_other”);
 
+ANSWER
+<?php
+$my_var = "this";         
+$that = "that";
+$the_other = 2.2;
+$not_set = "";            
+print("$my_var,$not_set,{$that}+{$the_other}");
+?>
+
+OUTPUT:
+this,,that+2.2
