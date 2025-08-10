@@ -1,1 +1,31 @@
+Question 8
+A customer visits a shop to buy a soft drink; he has two options:
+Drink A cost is Rs.25 and the size of the bottle is 11.
+Drink B cost is Rs.23 and its size of the bottle is 9.
+Which drink should he choose to save money? Solve this problem using function deal ( ).
 
+ANSWER
+<?php
+function deal() {
+    $cost_A = 25;
+    $size_A = 11;
+    $cost_B = 23;
+    $size_B = 9;
+
+    $cost_per_unit_A = $cost_A / $size_A;
+    $cost_per_unit_B = $cost_B / $size_B;
+
+    if ($cost_per_unit_A < $cost_per_unit_B) {
+        echo "Choose Drink A to save money";
+    } elseif ($cost_per_unit_B < $cost_per_unit_A) {
+        echo "Choose Drink B to save money";
+    } else {
+        echo "Both drinks cost the same per unit";
+    }
+}
+
+deal();
+?>
+
+OUTPUT
+Choose Drink A to save money
