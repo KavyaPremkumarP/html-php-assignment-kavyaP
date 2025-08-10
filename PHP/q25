@@ -1,1 +1,15 @@
+Question25
+Construct a PHP script to replace the first ‘the’ of the following string with ‘best’. Data:
+“The Thing will come to you soon”
+
+ANSWER
+<?php
+$text = "The Thing will come to you soon";
+$newText = preg_replace('/the/i', 'best', $text, 1);
+echo "Original: $text<br>";
+echo "Modified: $newText";
+?>
+OUTPUT:
+Original: The Thing will come to you soon
+Modified: best Thing will come to you soon
 
