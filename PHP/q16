@@ -1,1 +1,62 @@
+Question16
+Write a PHP function that takes two numbers as input and returns the sum of those
+numbers. Display the result on the webpage, when a button is clicked.
+
+ANSWER<?php
+// PHP function to return the sum of two numbers
+function sum($num1, $num2) {
+    return $num1 + $num2;
+}
+
+$result = null;
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get the values from the form input
+    $num1 = isset($_POST['num1']) ? (float)$_POST['num1'] : 0;
+    $num2 = isset($_POST['num2']) ? (float)$_POST['num2'] : 0;
+    
+    // Call the sum function and store the result
+    $result = sum($num1, $num2);
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum of Two Numbers</title>
+</head>
+<body>
+
+<h2>Sum Calculator</h2>
+
+<!-- HTML form to take two numbers as input -->
+<form method="POST" action="">
+    <label for="num1">Enter the first number:</label>
+    <input type="number" name="num1" required><br><br>
+    
+    <label for="num2">Enter the second number:</label>
+    <input type="number" name="num2" required><br><br>
+    
+    <input type="submit" value="Calculate Sum">
+</form>
+
+<?php
+// If result is not null, display the sum
+if ($result !== null) {
+    echo "<h3>The sum of $num1 and $num2 is: $result</h3>";
+}
+?>
+
+</body>
+</html>
+
+OUTPUT
+Enter the first number: 
+100
+Enter the second number: 
+34
+The sum of 100 and 34 is: 134
 
