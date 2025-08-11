@@ -8,10 +8,47 @@ If marks are less than 40%, students will be Fail.
 
 ANSWER
 <?php
-$sub = substr((string)12345, 2, 2);
-echo "sub is $sub";
+// Function to determine the grade based on marks
+function getGrade($marks) {
+    if ($marks >= 75) {
+        return "First Class";
+    } elseif ($marks >= 60 && $marks < 75) {
+        return "Second Class";
+    } elseif ($marks >= 40 && $marks < 60) {
+        return "Third Class";
+    } else {
+        return "Fail";
+    }
+}
+
+// Ask for the number of students
+echo "Enter number of students: ";
+$students = (int)fgets(STDIN);
+
+// Loop through each student
+for ($i = 1; $i <= $students; $i++) {
+    echo "\nStudent $i Name: ";
+    $name = trim(fgets(STDIN));
+
+    echo "Enter marks (out of 100): ";
+    $marks = (float)fgets(STDIN);
+
+    $grade = getGrade($marks);
+
+    echo "$name's Grade: $grade\n";
+}
 ?>
 
 
+
 OUTPUT:
-sub is 34
+Enter number of students: 2
+
+Student 1 Name: kavya
+Enter marks (out of 100): 89
+kavya's Grade: First Class
+
+Student 2 Name: rithika
+Enter marks (out of 100): 56
+rithika's Grade: Third Class
+
