@@ -1,1 +1,55 @@
+Question10
+Develop a program to check student grades based on marks using a loop.
+
+ANSWER
+<?php
+// Function to determine grade from marks
+function getGrade($marks) {
+    if ($marks >= 90 && $marks <= 100) {
+        return "A";
+    } elseif ($marks >= 80) {
+        return "B";
+    } elseif ($marks >= 70) {
+        return "C";
+    } elseif ($marks >= 60) {
+        return "D";
+    } elseif ($marks >= 0) {
+        return "F";
+    } else {
+        return "Invalid";
+    }
+}
+
+// Ask how many students to process
+echo "Enter number of students: ";
+$students = (int)fgets(STDIN);
+
+// Loop through each student
+for ($i = 1; $i <= $students; $i++) {
+    echo "\nStudent $i Name: ";
+    $name = trim(fgets(STDIN));
+
+    echo "Enter marks (0-100): ";
+    $marks = (float)fgets(STDIN);
+
+    $grade = getGrade($marks);
+
+    if ($grade === "Invalid") {
+        echo "❌ Invalid marks entered.\n";
+    } else {
+        echo "✅ $name's Grade: $grade\n";
+    }
+}
+?>
+
+OUTPUT
+Enter number of students: 2
+
+Student 1 Name: kavya
+Enter marks (0-100): 99
+✅ kavya's Grade: A
+
+Student 2 Name: rithika
+Enter marks (0-100): 98
+✅ rithika's Grade: A
 
