@@ -4,37 +4,86 @@ with customers deposit and withdrawal of amount.
 
 
 ANSWER
-?php
-$balance = 5000; 
-function deposit($amount, &$balance) {
-    if ($amount > 0) {
-        $balance += $amount;
-        echo "Deposited: ₹$amount <br>";
-    } else {
-        echo "Invalid deposit amount.<br>";
+<?php
+session_start();
+
+// Initialize balance if it's not already set in the session
+if (!isset($_SESSION['balance'])) {
+    $_SESSION['balance'] = 1000; // Initial balance
+}
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $choice = $_POST['choice'];
+    $amount = $_POST['amount'];
+
+    switch ($choice) {
+        case '1': // Deposit
+            if ($amount > 0) {
+                $_SESSION['balance'] += $amount;
+                $message = "Deposited $$amount. New balance: $$$_SESSION[balance]";
+            } else {
+                $message = "Invalid deposit amount.";
+            }
+            break;
+        case '2': // Withdraw
+            if ($amount > 0 && $amount <= $_SESSION['balance']) {
+                $_SESSION['balance'] -= $amount;
+                $message = "Withdrew $$amount. New balance: $$$_SESSION[balance]";
+            } else {
+                $message = ($amount <= 0) ? "Invalid withdrawal amount." : "Insufficient funds.";
+            }
+            break;
+        case '3': // Check Balance
+            $message = "Current balance: $$$_SESSION[balance]";
+            break;
+        case '4': // Exit
+            session_destroy();
+            $message = "Session ended. Goodbye!";
+            break;
+        default:
+            $message = "Invalid option selected.";
     }
 }
-function withdraw($amount, &$balance) {
-    if ($amount > 0) {
-        if ($amount <= $balance) {
-            $balance -= $amount;
-            echo "Withdrawn: ₹$amount <br>";
-        } else {
-            echo "Insufficient balance.<br>";
-        }
-    } else {
-        echo "Invalid withdrawal amount.<br>";
-    }
-}
-echo "<h2>Bank Transactions</h2>";
-echo "Opening Balance: ₹$balance <br><br>";
-deposit(2000, $balance);
-withdraw(1000, $balance);
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Transaction</title>
+</head>
+<body>
 
-OUTPUT:
-Bank Transactions
-Opening Balance: ₹5000 
-Deposited: ₹2000 
-Withdrawn: ₹1000 
+<h2>Bank Transaction System</h2>
+<p>Current balance: $<?php echo $_SESSION['balance']; ?></p>
+
+<form method="post">
+    <label>Select transaction type:</label><br>
+    <input type="radio" name="choice" value="1" required> Deposit<br>
+    <input type="radio" name="choice" value="2" required> Withdraw<br>
+    <input type="radio" name="choice" value="3" required> Check Balance<br>
+    <input type="radio" name="choice" value="4" required> Exit<br><br>
+
+    <label>Amount:</label><br>
+    <input type="number" name="amount" min="1"><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+<p><?php echo isset($message) ? $message : ''; ?></p>
+
+</body>
+</html>
+
+OUTPUT
+Current balance: $500
+Select transaction type:
+ Deposit
+ Withdraw
+ Check Balance
+ Exit
+Amount:
+500
+Withdrew $500. New balance: $$500
