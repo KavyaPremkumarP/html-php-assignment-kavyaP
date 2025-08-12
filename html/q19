@@ -36,3 +36,9 @@ if ($result) {
 ?>
 </body>
 </html>
+
+OUTPUT
+Enter numbers (comma separated): 
+e.g. 10, 20, 5, 30
+Highest Value: 30
+Lowest Value: 5
