@@ -5,85 +5,87 @@ with customers deposit and withdrawal of amount.
 
 ANSWER
 <?php
-session_start();
+// Initial balance
+$balance = 1000;
 
-// Initialize balance if it's not already set in the session
-if (!isset($_SESSION['balance'])) {
-    $_SESSION['balance'] = 1000; // Initial balance
-}
+while (true) {
+    echo "\n--- Bank Menu ---\n";
+    echo "1. Deposit\n";
+    echo "2. Withdraw\n";
+    echo "3. Check Balance\n";
+    echo "4. Mini Statement\n";
+    echo "5. Exit\n";
 
-// Handle form submission
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $choice = $_POST['choice'];
-    $amount = $_POST['amount'];
+    $choice = (int) readline("Enter your choice: ");
 
     switch ($choice) {
-        case '1': // Deposit
+        case 1: // Deposit
+            $amount = (float) readline("Enter deposit amount: ");
             if ($amount > 0) {
-                $_SESSION['balance'] += $amount;
-                $message = "Deposited $$amount. New balance: $$$_SESSION[balance]";
+                $balance += $amount;
+                echo "Deposited ₹$amount successfully.\n";
             } else {
-                $message = "Invalid deposit amount.";
+                echo "Invalid deposit amount.\n";
             }
             break;
-        case '2': // Withdraw
-            if ($amount > 0 && $amount <= $_SESSION['balance']) {
-                $_SESSION['balance'] -= $amount;
-                $message = "Withdrew $$amount. New balance: $$$_SESSION[balance]";
+
+        case 2: // Withdraw
+            $amount = (float) readline("Enter withdrawal amount: ");
+            if ($amount > $balance) {
+                echo "Insufficient balance.\n";
+            } elseif ($amount <= 0) {
+                echo "Invalid withdrawal amount.\n";
             } else {
-                $message = ($amount <= 0) ? "Invalid withdrawal amount." : "Insufficient funds.";
+                $balance -= $amount;
+                echo "Withdrew ₹$amount successfully.\n";
             }
             break;
-        case '3': // Check Balance
-            $message = "Current balance: $$$_SESSION[balance]";
+
+        case 3: // Check Balance
+            echo "Your current balance is ₹$balance\n";
             break;
-        case '4': // Exit
-            session_destroy();
-            $message = "Session ended. Goodbye!";
+
+        case 4: // Mini Statement
+            $transactions = ["Deposit ₹500", "Withdraw ₹200", "Deposit ₹1000"];
+            echo "Mini Statement:\n";
+            foreach ($transactions as $t) {
+                echo "- $t\n";
+            }
             break;
+
+        case 5: // Exit
+            echo "Thank you for banking with us.\n";
+            break 2;
+
         default:
-            $message = "Invalid option selected.";
+            echo "Invalid choice. Please try again.\n";
+    }
+
+    $next = strtolower(readline("Do you want to continue? (yes/no): "));
+    if ($next == "no") {
+        echo "Session ended.\n";
+        break;
+    } elseif ($next != "yes") {
+        echo "Invalid input, returning to menu...\n";
+        continue;
     }
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank Transaction</title>
-</head>
-<body>
 
-<h2>Bank Transaction System</h2>
-<p>Current balance: $<?php echo $_SESSION['balance']; ?></p>
+OUTPUT:
 
-<form method="post">
-    <label>Select transaction type:</label><br>
-    <input type="radio" name="choice" value="1" required> Deposit<br>
-    <input type="radio" name="choice" value="2" required> Withdraw<br>
-    <input type="radio" name="choice" value="3" required> Check Balance<br>
-    <input type="radio" name="choice" value="4" required> Exit<br><br>
+--- Bank Menu ---
+1. Deposit
+2. Withdraw
+3. Check Balance
+4. Mini Statement
+5. Exit
+Enter your choice: 1
+Enter deposit amount: 500
+Deposited ₹500 successfully.
+Do you want to continue? (yes/no): no
+Session ended.
 
-    <label>Amount:</label><br>
-    <input type="number" name="amount" min="1"><br><br>
 
-    <input type="submit" value="Submit">
-</form>
-
-<p><?php echo isset($message) ? $message : ''; ?></p>
-
-</body>
-</html>
-
-OUTPUT
-Current balance: $500
-Select transaction type:
- Deposit
- Withdraw
- Check Balance
- Exit
-Amount:
-500
-Withdrew $500. New balance: $$500
+=== Code Execution Successful ===
