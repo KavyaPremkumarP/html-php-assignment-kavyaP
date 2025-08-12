@@ -3,7 +3,7 @@ Infer the usage of the following PHP functions:
 (i) rand() (ii) abs() (iii) strreplace() (iv) pi( ) (v) ceil()
 
 ANSWER
-)<?php
+<?php
 // 1. rand() - Random number
 echo "<h3>rand() Example:</h3>";
 echo "Random number: " . rand() . "<br>";
