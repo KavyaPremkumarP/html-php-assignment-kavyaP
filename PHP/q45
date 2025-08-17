@@ -1,1 +1,65 @@
+45. Write a PHP function to compare two multidimensional arrays and return the difference.
+ANSWER
+<?php
+function array_diff_multidimensional(array $array1, array $array2): array {
+    $difference = [];
 
+    foreach ($array1 as $key => $value) {
+        if (is_array($value)) {
+            // If key exists in array2 and both are arrays, compare recursively
+            if (isset($array2[$key]) && is_array($array2[$key])) {
+                $diff = array_diff_multidimensional($value, $array2[$key]);
+                if (!empty($diff)) {
+                    $difference[$key] = $diff;
+                }
+            } else {
+                // Key missing in array2 or not an array, so add whole sub-array
+                $difference[$key] = $value;
+            }
+        } else {
+            // Scalar values: add if key missing or value different
+            if (!array_key_exists($key, $array2) || $array2[$key] !== $value) {
+                $difference[$key] = $value;
+            }
+        }
+    }
+
+    return $difference;
+}
+
+// Example usage
+$array1 = [
+    "a" => "apple",
+    "b" => [
+        "x" => "x-ray",
+        "y" => "yellow",
+        "z" => "zebra"
+    ],
+    "c" => "cat"
+];
+
+$array2 = [
+    "a" => "apple",
+    "b" => [
+        "x" => "x-ray",
+        "y" => "yellow"
+    ],
+    "d" => "dog"
+];
+
+$diff = array_diff_multidimensional($array1, $array2);
+
+echo "<pre>";
+print_r($diff);
+echo "</pre>";
+
+OUTPUT
+Array
+(
+    [b] => Array
+        (
+            [z] => zebra
+        )
+
+    [c] => cat
+)
