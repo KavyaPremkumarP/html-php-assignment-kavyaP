@@ -1,1 +1,55 @@
+39. A school wants to automate the calculation of student grades. Design a system that allows teachers to input student scores, calculates their grades, and generates a summary report. How would you utilize arrays and
+array functions to store and process the student data effectively?
+ANSWER
+<?php
+// Step 1: Define student data
+$students = [
+    ['name' => 'Alice', 'score' => 85],
+    ['name' => 'Bob', 'score' => 72],
+    ['name' => 'Charlie', 'score' => 95],
+    ['name' => 'Diana', 'score' => 60],
+    ['name' => 'Evan', 'score' => 48]
+];
 
+// Step 2: Function to calculate grade
+function calculateGrade($score) {
+    if ($score >= 90) {
+        return 'A';
+    } elseif ($score >= 80) {
+        return 'B';
+    } elseif ($score >= 70) {
+        return 'C';
+    } elseif ($score >= 60) {
+        return 'D';
+    } else {
+        return 'F';
+    }
+}
+
+// Step 3: Add grade to each student
+foreach ($students as &$student) {
+    $student['grade'] = calculateGrade($student['score']);
+}
+unset($student); // break reference
+
+// Step 4: Display the report
+echo "Student Grade Report\n";
+echo "---------------------\n";
+echo str_pad("Name", 12) . str_pad("Score", 8) . "Grade\n";
+echo str_repeat("-", 25) . "\n";
+
+foreach ($students as $student) {
+    echo str_pad($student['name'], 12) . str_pad($student['score'], 8) . $student['grade'] . "\n";
+}
+?>
+
+OUTPUT
+Student Grade Report
+---------------------
+Name        Score   Grade
+-------------------------
+Alice       85      B
+Bob         72      C
+Charlie     95      A
+Diana       60      D
+Evan        48      F
