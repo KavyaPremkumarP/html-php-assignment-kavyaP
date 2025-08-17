@@ -1,1 +1,21 @@
+38. Interpret the steps to iterate over a PHP array using a while loop with an example
+ANSWER
+<?php
+// Define an array
+$fruits = array("Apple", "Banana", "Cherry", "Mango");
+// Start iteration
+while (($fruit = current($fruits)) !== false) {
+    // Get current key (optional)
+    $key = key($fruits);
+// Print key and value
+    echo "Key: $key, Value: $fruit<br>";
+ // Move to the next element
+    next($fruits);
+}
+?>
 
+OUTPUT
+Key: 0, Value: Apple
+Key: 1, Value: Banana
+Key: 2, Value: Cherry
+Key: 3, Value: Mango
