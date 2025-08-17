@@ -1,1 +1,61 @@
+48. Record number handling in PHP with suitable examples.
+<?php
+echo "<h2>1. Record Numbering in a Simple Array</h2>";
+$students = ["Alice", "Bob", "Charlie", "Diana"];
+$recordNumber = 1;
+foreach ($students as $student) {
+    echo "Record $recordNumber: $student<br>";
+    $recordNumber++;
+}
+echo "<h2>2. Record Numbering Using Array Index</h2>";
+foreach ($students as $index => $student) {
+    echo "Record " . ($index + 1) . ": $student<br>";
+}
+echo "<h2>3. Simulated Database Record Handling</h2>";
+// Simulate database result set as an array of associative arrays
+$results = [
+    ["id" => 101, "name" => "John"],
+    ["id" => 102, "name" => "Jane"],
+    ["id" => 103, "name" => "Tom"]
+];
+$recordNumber = 1;
+foreach ($results as $row) {
+    echo "Record $recordNumber: ID = " . $row['id'] . ", Name = " . $row['name'] . "<br>";
+    $recordNumber++;
+}
+echo "<h2>4. Record Numbering with Pagination</h2>";
+// Simulate current page and records per page
+$currentPage = 3;
+$recordsPerPage = 5;
+// Calculate starting record number
+$startRecordNumber = ($currentPage - 1) * $recordsPerPage + 1;
+// Simulated page data
+$pageData = ["Record A", "Record B", "Record C", "Record D", "Record E"];
 
+foreach ($pageData as $index => $value) {
+    $recordNumber = $startRecordNumber + $index;
+    echo "Record $recordNumber: $value<br>";
+}
+?>
+
+OUTPUT
+1. Record Numbering in a Simple Array
+Record 1: Alice
+Record 2: Bob
+Record 3: Charlie
+Record 4: Diana
+2. Record Numbering Using Array Index
+Record 1: Alice
+Record 2: Bob
+Record 3: Charlie
+Record 4: Diana
+3. Simulated Database Record Handling
+Record 1: ID = 101, Name = John
+Record 2: ID = 102, Name = Jane
+Record 3: ID = 103, Name = Tom
+4. Record Numbering with Pagination
+Record 11: Record A
+Record 12: Record B
+Record 13: Record C
+Record 14: Record D
+Record 15: Record E
