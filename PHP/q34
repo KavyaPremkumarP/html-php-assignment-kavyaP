@@ -1,1 +1,19 @@
+Question 34
+34. Replace all occurrences of a specific word with another word in a string using regular expressions in
+PHP.
+ANSWER
+<?php
+// Original string
+$text = "The cat sat on the mat. The cat was happy.";
+// Word to replace
+$search = '\bcat\b'; // \b ensures "cat" is matched as a whole word
+// Replacement word
+$replace = 'dog';
+// Replace using preg_replace
+$result = preg_replace("/$search/", $replace, $text);
+// Output result
+echo $result;
+?>
 
+OUTPUT
+The dog sat on the mat. The dog was happy.
