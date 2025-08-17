@@ -1,1 +1,24 @@
+Question35
+35 Write a PHP script using an array that checks if a string contains another string and displays the result.
+ANSWER
+<?php
+// Main string to search within
+$mainString = "The quick brown fox jumps over the lazy dog.";
+// Array of words/phrases to search for
+$searchTerms = array("fox", "dog", "cat", "quick", "elephant");
+// Loop through the array and check if each term exists in the main string
+foreach ($searchTerms as $term) {
+    if (strpos($mainString, $term) !== false) {
+        echo "The string contains '{$term}'.<br>";
+    } else {
+        echo "The string does NOT contain '{$term}'.<br>";
+    }
+}
+?>
 
+OUTPUT
+The string contains 'fox'.
+The string contains 'dog'.
+The string does NOT contain 'cat'.
+The string contains 'quick'.
+The string does NOT contain 'elephant'.
