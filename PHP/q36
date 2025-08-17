@@ -1,1 +1,16 @@
+36. Create an array of fruits in PHP and display the third element.
+ANSWER
+<?php
+// Create an array of fruits
+$fruits = array("Apple", "Banana", "Cherry", "Mango", "Orange");
 
+// Check if the third element exists before displaying it
+if (isset($fruits[2])) {
+    echo "The third fruit is: " . $fruits[2];
+} else {
+    echo "The third fruit does not exist in the array.";
+}
+?>
+
+OUTPUT
+The third fruit is: Cherry
