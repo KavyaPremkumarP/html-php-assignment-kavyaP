@@ -1,1 +1,16 @@
+47. Delete an element from the below array. And print the array elements in PHP. $x = array (1, 2, 3, 4, 5);
+<?php
+$x = array(1, 2, 3, 4, 5);
+// Delete the element at index 2 (which is value 3)
+unset($x[2]);
+// Optional: Reindex the array if you want sequential numeric keys
+$x = array_values($x);
 
+// Print the updated array
+foreach ($x as $value) {
+    echo $value . " ";
+}
+?>
+
+ OUTPUT
+1 2 4 5
