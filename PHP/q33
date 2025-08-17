@@ -1,1 +1,16 @@
+33. Construct a PHP code to create a multidimensional array representing a matrix and display the value inthe second row and third column.
+ANSWER
+<?php
+// Define a 3x3 matrix (3 rows and 3 columns)
+$matrix = array(
+    array(1, 2, 3),     // Row 0
+    array(4, 5, 6),     // Row 1 (Second row)
+    array(7, 8, 9)      // Row 2
+);
 
+// Access and display the value in second row, third column
+echo "The value in the second row and third column is: " . $matrix[1][2];
+?>
+
+OUTPUT
+The value in the second row and third column is: 6
