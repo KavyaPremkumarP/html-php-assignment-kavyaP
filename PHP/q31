@@ -1,1 +1,20 @@
+Question 31
+Remove the first element from an array in PHP using array functions.
 
+ANSWER
+<?php
+$array = [1, 2, 3, 4, 5];
+
+array_shift($array); // Removes the first element (1)
+
+print_r($array);
+?>
+
+OUTPUT:
+Array
+(
+    [0] => 2
+    [1] => 3
+    [2] => 4
+    [3] => 5
+)
