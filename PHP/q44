@@ -1,1 +1,95 @@
+44. Develop a music playlist management system for a streaming service. The system should allow users to create, modify, and organize playlists. How would you use arrays and array functions to store and
+manipulate the song data and playlist information efficiently?
+ANSWER
+<?php
+// Songs library
+$songs = [
+    ['id' => 1, 'title' => 'Song A', 'artist' => 'Artist 1', 'duration' => 210],
+    ['id' => 2, 'title' => 'Song B', 'artist' => 'Artist 2', 'duration' => 190],
+    ['id' => 3, 'title' => 'Song C', 'artist' => 'Artist 3', 'duration' => 200],
+];
 
+// Playlists with song IDs
+$playlists = [
+    ['name' => 'Favorites', 'songs' => [1, 2]],
+    ['name' => 'Chill', 'songs' => [3]],
+];
+
+// Function to create a new playlist
+function createPlaylist(&$playlists, $playlistName) {
+    $playlists[] = ['name' => $playlistName, 'songs' => []];
+}
+
+// Function to add a song to a playlist
+function addSongToPlaylist(&$playlists, $playlistName, $songId) {
+    foreach ($playlists as &$playlist) {
+        if ($playlist['name'] === $playlistName) {
+            if (!in_array($songId, $playlist['songs'])) {
+                $playlist['songs'][] = $songId;
+            }
+            return true;
+        }
+    }
+    return false; // playlist not found
+}
+
+// Function to remove a song from a playlist
+function removeSongFromPlaylist(&$playlists, $playlistName, $songId) {
+    foreach ($playlists as &$playlist) {
+        if ($playlist['name'] === $playlistName) {
+            $index = array_search($songId, $playlist['songs']);
+            if ($index !== false) {
+                array_splice($playlist['songs'], $index, 1);
+                return true;
+            }
+        }
+    }
+    return false; // playlist or song not found
+}
+
+// Function to get song details by ID
+function getSongById($songs, $songId) {
+    foreach ($songs as $song) {
+        if ($song['id'] === $songId) {
+            return $song;
+        }
+    }
+    return null;
+}
+
+// Function to display playlist songs with details
+function displayPlaylist($playlists, $songs, $playlistName) {
+    foreach ($playlists as $playlist) {
+        if ($playlist['name'] === $playlistName) {
+            echo "Playlist: {$playlist['name']}\n";
+            foreach ($playlist['songs'] as $songId) {
+                $song = getSongById($songs, $songId);
+                if ($song) {
+                    echo "- {$song['title']} by {$song['artist']} ({$song['duration']}s)\n";
+                }
+            }
+            return;
+        }
+    }
+    echo "Playlist not found.\n";
+}
+
+// Usage example:
+
+// Create new playlist
+createPlaylist($playlists, 'Workout');
+
+// Add songs to 'Workout'
+addSongToPlaylist($playlists, 'Workout', 1);
+addSongToPlaylist($playlists, 'Workout', 3);
+
+// Remove a song from 'Favorites'
+removeSongFromPlaylist($playlists, 'Favorites', 2);
+
+// Display playlists
+displayPlaylist($playlists, $songs, 'Favorites');
+echo "\n";
+displayPlaylist($playlists, $songs, 'Workout');
+?>
+OUTPUT
+Playlist: Favorites - Song A by Artist 1 (210s) Playlist: Workout - Song A by Artist 1 (210s) - Song C by Artist 3 (200s)
