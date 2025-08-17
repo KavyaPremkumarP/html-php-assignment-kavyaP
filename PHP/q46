@@ -1,1 +1,24 @@
+46. Write a PHP program to find the index of a specific value in an array.
+ANSWER
+<?php
+function findIndexOfValue($array, $value) {
+    $index = array_search($value, $array);
+    
+    if ($index === false) {
+        return "Value not found in array.";
+    } else {
+        return "The index of '$value' is: $index";
+    }
+}
+// Example array
+$fruits = ["apple", "banana", "orange", "mango"];
 
+// Example value to search
+$valueToFind = "orange";
+
+// Call the function and display result
+echo findIndexOfValue($fruits, $valueToFind);
+?>
+
+OUTPUT
+The index of 'orange' is: 2
