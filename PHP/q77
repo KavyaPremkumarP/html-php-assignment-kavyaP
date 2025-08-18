@@ -1,1 +1,40 @@
+77. Classify the various network functions which provide network information or functions.
+ANSWER
+Classification of Network Functions in PHP
+1. DNS Functions
+Used to resolve hostnames to IP addresses and vice versa.
+gethostbyname() – Gets the IP address of a hostname.
+gethostbynamel() – Gets a list of IP addresses for a hostname.
+gethostbyaddr() – Gets the hostname for a given IP address.
+checkdnsrr() – Checks DNS records of a specific type.
+dns_get_record() – Fetches DNS resource records.
 
+2. IP Address Functions
+Used to manage and validate IP addresses.
+ip2long() – Converts an IP address string to a long integer.
+long2ip() – Converts a long integer back to an IP address.
+inet_pton() – Converts a human-readable IP address to packed in_addr representation.
+inet_ntop() – Converts packed address back to human-readable format.
+filter_var() – Can be used with FILTER_VALIDATE_IP to validate IP addresses.
+
+3. Socket Functions
+Used for low-level networking (TCP/UDP connections).
+socket_create() – Creates a socket.
+socket_bind() – Binds the socket to an IP address and port.
+socket_listen() – Listens for a connection on the socket.
+socket_accept() – Accepts a connection on the socket.
+socket_read() – Reads from a socket.
+socket_write() – Writes to a socket.
+socket_close() – Closes the socket.
+
+4. Mail/SMTP Functions
+Used for sending emails (internally uses network).
+mail() – Sends an email using the server’s mail settings.
+
+5. HTTP and URL Functions
+Used for fetching web content or handling URLs.
+file_get_contents('http://...') – Fetches content from a URL.
+fopen('http://...') – Opens a remote file stream.
+parse_url() – Parses a URL into components.
+get_headers() – Gets HTTP headers from a URL.
+curl_* – cURL functions for more advanced HTTP operations (e.g., curl_init(), curl_exec()).
