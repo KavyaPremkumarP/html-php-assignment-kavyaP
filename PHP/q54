@@ -1,1 +1,65 @@
+54. Design a PHP program that simulates a ticket booking queue using built-in array functions.
+ANSWER
+<?php
+// Initialize an empty queue
+$ticketQueue = [];
+// Function to add person to the queue (enqueue)
+function joinQueue(&$queue, $person) {
+    array_push($queue, $person);  // Adds to the end of the array
+    echo "$person has joined the ticket queue.\n";
+}
+// Function to serve a person from the queue (dequeue)
+function serveNext(&$queue) {
+    if (!empty($queue)) {
+        $servedPerson = array_shift($queue);  // Removes from the front
+        echo "$servedPerson has been issued a ticket.\n";
+    } else {
+        echo "No one is in the queue.\n";
+    }
+}
+// Simulate queue operations
+joinQueue($ticketQueue, "Alice");
+joinQueue($ticketQueue, "Bob");
+joinQueue($ticketQueue, "Charlie");
+echo "\n--- Serving Tickets ---\n";
+serveNext($ticketQueue);
+serveNext($ticketQueue);
+echo "\n--- Current Queue ---\n";
+print_r($ticketQueue);
+// More people join
+joinQueue($ticketQueue, "David");
+joinQueue($ticketQueue, "Eve");
+echo "\n--- Serving More Tickets ---\n";
+serveNext($ticketQueue);
+serveNext($ticketQueue);
+serveNext($ticketQueue);  // This will show the queue is empty
+echo "\n--- Final Queue ---\n";
+print_r($ticketQueue);
+?>
+
+OUTPUT
+Alice has joined the ticket queue.
+Bob has joined the ticket queue.
+Charlie has joined the ticket queue.
+--- Serving Tickets ---
+Alice has been issued a ticket.
+Bob has been issued a ticket.
+--- Current Queue ---
+Array
+(
+    [0] => Charlie
+)
+David has joined the ticket queue.
+Eve has joined the ticket queue.
+--- Serving More Tickets ---
+Charlie has been issued a ticket.
+David has been issued a ticket.
+Eve has been issued a ticket.
+--- Final Queue ---
+Array
+(
+)
+
+
+
 
