@@ -1,1 +1,21 @@
+67. Construct a program that tokenizes a sentence into words using regular expressions. Then, count the number of occurrences of each word and display the results.
+ANSWER
+<?php
+// Sample sentence
+$sentence = "The quick brown fox jumps over the lazy dog. The fox is quick and smart.";
+// Step 1: Convert to lowercase (to count words case-insensitively)
+$sentence = strtolower($sentence);
+// Step 2: Tokenize using regular expression
+// \b\w+\b matches individual words
+preg_match_all('/\b\w+\b/', $sentence, $matches);
+// Step 3: Count word frequencies
+$wordCounts = array_count_values($matches[0]);
+// Step 4: Display the results
+echo "Word Count:\n";
+foreach ($wordCounts as $word => $count) {
+    echo "$word: $count\n";
+}
+?>
 
+OUTPUT
+Word Count: the: 3 quick: 2 brown: 1 fox: 2 jumps: 1 over: 1 lazy: 1 dog: 1 is: 1 and: 1 smart: 1
