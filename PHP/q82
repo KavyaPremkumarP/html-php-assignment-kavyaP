@@ -1,1 +1,58 @@
+82. Implement the setcookie( ) function with various arguments using the PHP program.
+<?php
+// Start output buffering to avoid header issues
+ob_start();
+
+// Set various cookies
+
+// 1. Basic cookie (expires in 1 hour)
+setcookie("basic_cookie", "BasicValue", time() + 3600);
+
+// 2. Cookie with path restriction (only works in '/')
+setcookie("path_cookie", "PathValue", time() + 3600, "/");
+
+// 3. Secure cookie (only sent via HTTPS, may not show on localhost)
+setcookie("secure_cookie", "SecureValue", time() + 3600, "/", "", true);
+
+// 4. HttpOnly cookie (inaccessible via JavaScript)
+setcookie("httponly_cookie", "HttpOnlyValue", time() + 3600, "/", "", false, true);
+
+// 5. Secure + HttpOnly cookie
+setcookie("full_cookie", "SecureHttpOnly", time() + 3600, "/", "", true, true);
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHP setcookie() Example</title>
+</head>
+<body>
+
+<h2>🍪 PHP setcookie() Example</h2>
+
+<?php
+if (!empty($_COOKIE)) {
+    echo "<h3>Cookies available (after refresh):</h3>";
+    echo "<ul>";
+    foreach ($_COOKIE as $key => $value) {
+        echo "<li><strong>$key</strong>: $value</li>";
+    }
+    echo "</ul>";
+} else {
+    echo "<p>Cookies have been set. Please <strong>refresh the page</strong> to see their values.</p>";
+}
+?>
+
+</body>
+</html>
+
+OUTPUT 
+PHP setcookie() Example
+Cookies available (after refresh):
+PHPSESSID: qr92k91mkeuv9rmjvd9mlpsnra
+test_cookie: CookieValue123
+basic_cookie: BasicValue
+secure_cookie: SecureValue
+httponly_cookie: HttpOnlyValue
+full_cookie: SecureHttpOnly
 
