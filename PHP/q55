@@ -1,1 +1,29 @@
+55. Develop a PHP script that uses stack functions to reverse a string.
+ANSWER
+<?php
+function reverseStringUsingStack($input) {
+    // Step 1: Convert the string into an array of characters
+    $chars = str_split($input);
+   // Step 2: Push each character onto the stack
+    $stack = [];
+    foreach ($chars as $char) {
+        array_push($stack, $char); // Push to stack
+    }
+  // Step 3: Pop each character off the stack to form the reversed string
+    $reversed = '';
+    while (!empty($stack)) {
+        $reversed .= array_pop($stack); // Pop from stack
+    }
+
+    return $reversed;
+}
+// Example usage
+$original = "OpenAI GPT-4";
+$reversed = reverseStringUsingStack($original);
+echo "Original String: $original\n";
+echo "Reversed String: $reversed\n";
+?>
+
+OUTPUT
+Original String: OpenAI GPT-4 Reversed String: 4-TPG IAnepO
 
