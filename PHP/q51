@@ -1,1 +1,13 @@
+51. Differentiate between array_shift() and array_unshift() in PHP.
+ANSWER:
+arrat_shift()
+$fruits = ["apple", "banana", "cherry"];
+$first = array_shift($fruits);
+print_r($fruits); // Output: ["banana", "cherry"]
+echo $first;      // Output: apple
 
+array_unshift()
+$fruits = ["banana", "cherry"];
+$count = array_unshift($fruits, "apple");
+print_r($fruits); // Output: ["apple", "banana", "cherry"]
+echo $count;      // Output: 3
