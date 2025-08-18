@@ -1,1 +1,33 @@
+78. Elucidate the steps to read and delete existing cookies in the browser.
+ANSWER
+What are Cookies?
+Cookies are small pieces of data stored in the user's browser, often used to remember login info, user preferences, etc.
 
+Steps to Read Existing Cookies
+📌 Step-by-step:
+Cookies are stored in the $_COOKIE superglobal array.
+You can access them using the cookie name as the key.
+
+Steps to Delete a Cookie
+📌 Step-by-step:
+Use setcookie() again with the same name.
+Set the expiration time in the past.
+This tells the browser to remove the cookie.
+
+<?php
+// Set cookie for demonstration
+setcookie("username", "JohnDoe", time() + 3600); // valid for 1 hour
+// Read cookie
+if (isset($_COOKIE['username'])) {
+    echo "Cookie value: " . $_COOKIE['username'] . "<br>";
+} else {
+    echo "Cookie not set.<br>";
+}
+// Delete cookie
+setcookie("username", "", time() - 3600);
+echo "Cookie 'username' deleted.";
+?>
+
+OUTPUT
+Cookie not set.
+Cookie 'username' deleted.
