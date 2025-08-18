@@ -1,1 +1,63 @@
+52. Compare stack and queue operations using PHP with appropriate examples.
+ANSWER:
+STACK
+<?php
+$stack = array();
+// Push elements onto the stack
+array_push($stack, "A");
+array_push($stack, "B");
+array_push($stack, "C");
+echo "Stack after pushing: ";
+print_r($stack);
+// Pop element from the stack
+$popped = array_pop($stack);
+echo "Popped element: $popped\n";
+echo "Stack after popping: ";
+print_r($stack);
+?>
+OUTPUT
+Stack after pushing: Array
+	(
+	  [0] => A
+	    [1] => B
+	    [2] => C
+	)
+	Popped element: C
+	Stack after popping: Array
+	(
+	    [0] => A
+	    [1] => B
+	)
+
+
+QUEUE
+<?php
+$queue = array();
+// Enqueue elements
+array_push($queue, "A");
+array_push($queue, "B");
+array_push($queue, "C");
+echo "Queue after enqueuing: ";
+print_r($queue);
+// Dequeue element
+$dequeued = array_shift($queue);
+echo "Dequeued element: $dequeued\n";
+echo "Queue after dequeuing: ";
+print_r($queue);
+?>
+OUTPUT
+Queue after enqueuing: Array
+(
+    [0] => A
+    [1] => B
+    [2] => C
+)
+Dequeued element: A
+Queue after dequeuing: Array
+(
+    [0] => B
+    [1] => C
+)
+
+
 
