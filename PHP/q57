@@ -1,1 +1,46 @@
+What is a Regular Expression (Regex)?
+
+A Regular Expression (regex) is a sequence of characters that defines a search pattern. It is commonly used for string matching, validation, searching, and replacement.
+
+In PHP, regular expressions can be used with functions like:
+
+preg_match() – Match a pattern
+
+preg_match_all() – Match all occurrences
+
+preg_replace() – Replace based on pattern
+
+preg_split() – Split a string using a pattern
+<?php
+
+// 1. Check if a string contains digits
+$input = "Welcome123";
+if (preg_match('/\d+/', $input)) {
+    echo "1. The string contains digits.\n";
+}
+
+// 2. Validate an email address
+$email = "user@example.com";
+if (preg_match('/^[\w\.-]+@[\w\.-]+\.\w+$/', $email)) {
+    echo "2. '$email' is a valid email address.\n";
+}
+
+// 3. Replace all digits with '*'
+$text = "Phone: 9876543210";
+$replaced = preg_replace('/\d/', '*', $text);
+echo "3. After replacing digits: $replaced\n";
+
+// 4. Split a string by comma and/or whitespace
+$data = "apple, banana orange";
+$parts = preg_split('/[\s,]+/', $data);
+echo "4. Split result: ";
+print_r($parts);
+
+// 5. Extract all words that start with capital letters
+$sentence = "Hello World, this is PHP Regex.";
+preg_match_all('/\b[A-Z][a-z]*\b/', $sentence, $matches);
+echo "5. Words starting with capital letters: ";
+print_r($matches[0]);
+
+?>
 
