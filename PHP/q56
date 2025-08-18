@@ -1,1 +1,77 @@
+56. What are all the Functions available to sort a PHP array?
+ANSWER
+1. Sorting Indexed Arrays (by values):
 
+sort(array $array)
+
+Sorts array in ascending order.
+
+Does not preserve keys (reindexes the array).
+
+rsort(array $array)
+
+Sorts array in descending order.
+
+Does not preserve keys.
+
+✅ 2. Sorting Associative Arrays by Values:
+
+asort(array $array)
+
+Sorts array by values in ascending order.
+
+Preserves key-value association.
+
+arsort(array $array)
+
+Sorts array by values in descending order.
+
+Preserves keys.
+
+✅ 3. Sorting Associative Arrays by Keys:
+
+ksort(array $array)
+
+Sorts array by keys in ascending order.
+
+Preserves key-value association.
+
+krsort(array $array)
+
+Sorts array by keys in descending order.
+
+Preserves keys.
+
+✅ 4. Custom/User-Defined Sorting:
+
+usort(array &$array, callable $callback)
+
+Sorts indexed array using a custom comparison function.
+
+Does not preserve keys.
+
+uasort(array &$array, callable $callback)
+
+Sorts associative array by values using a user-defined function.
+
+Preserves keys.
+
+uksort(array &$array, callable $callback)
+
+Sorts associative array by keys using a user-defined function.
+
+Preserves keys.
+
+✅ 5. Natural Order Sorting:
+
+natsort(array &$array)
+
+Sorts array using natural "human" order (e.g., file1, file2, file10).
+
+Preserves keys.
+
+natcasesort(array &$array)
+
+Same as natsort() but case-insensitive.
+
+Preserves keys.
