@@ -1,1 +1,21 @@
+59. Create a function that takes an array of numbers as input and returns the average value.
+ANSWER
+<?php
+function calculateAverage($numbers) {
+    if (!is_array($numbers) || empty($numbers)) {
+        return null; // Return null if input is not a valid array or is empty
+    }
 
+    $sum = array_sum($numbers);
+    $count = count($numbers);
+
+    return $sum / $count;
+}
+// Example usage:
+$values = [10, 20, 30, 40, 50];
+$average = calculateAverage($values);
+echo "The average is: " . $average;
+?>
+
+OUTPUT
+The average is: 30
