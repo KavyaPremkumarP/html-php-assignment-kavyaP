@@ -1,1 +1,52 @@
+71. Tell the different file handling modes available in PHP?
 
+ANSWER
+PHP File Handling Modes (for fopen()):
+
+1.'r'
+Open file for reading only.
+File pointer starts at the beginning.
+Fails if the file does not exist.
+
+2.'r+'
+Open file for reading and writing.
+File pointer starts at the beginning.
+Fails if the file does not exist.
+
+3.'w'
+Open file for writing only.
+Truncates the file to zero length (clears content).
+Creates the file if it does not exist.
+
+4.'w+'
+Open file for reading and writing.
+Truncates the file to zero length.
+Creates the file if it does not exist.
+
+5.'a'
+Open file for writing only.
+File pointer starts at the end (append mode).
+Creates the file if it does not exist.
+
+6.'a+'
+Open file for reading and writing.
+File pointer starts at the end.
+Creates the file if it does not exist.
+
+7.'x'
+Create and open file for writing only.
+Fails if the file already exists.
+
+8.'x+'
+Create and open file for reading and writing.
+Fails if the file already exists.
+
+9.'c'
+Open file for writing only.
+Creates the file if it does not exist.
+Does not truncate the file.
+
+10.'c+'
+Open file for reading and writing.
+Creates the file if it does not exist.
+Does not truncate the file.
