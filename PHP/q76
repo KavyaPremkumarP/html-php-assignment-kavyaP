@@ -1,1 +1,26 @@
+76. Write a simple 'birthday countdown' script, the script will count the number of days between current day and birthday.
 
+ANSWER
+<?php
+// Set your birthday (MM-DD format)
+$birthday = '10-25';  // October 25
+// Get current year and today's date
+$currentYear = date('Y');
+$today = date('Y-m-d');
+// Combine birthday with current year
+$birthdayThisYear = date('Y-m-d', strtotime($currentYear . '-' . $birthday));
+// If birthday has passed this year, set to next year
+if (strtotime($birthdayThisYear) < strtotime($today)) {
+    $nextBirthday = date('Y-m-d', strtotime(($currentYear + 1) . '-' . $birthday));
+} else {
+    $nextBirthday = $birthdayThisYear;
+}
+// Calculate the difference
+$diff = strtotime($nextBirthday) - strtotime($today);
+$daysRemaining = ceil($diff / (60 * 60 * 24));
+// Display result
+echo "🎂 Your next birthday is in <strong>$daysRemaining</strong> day(s)!";
+?>
+
+OUTPUT
+🎂 Your next birthday is in 68 day(s)!
