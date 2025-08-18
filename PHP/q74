@@ -1,1 +1,56 @@
+74. Outline the file reading and writing functions of PHP with suitable examples.
+ANSWER
+PHP File Reading Functions
+1.fopen()
+$handle = fopen("file.txt", "r");
+2.fread()
+$content = fread($handle, filesize("file.txt"));
+3.fgets()
+$line = fgets($handle);
+4.file_get_contents()
+$content = file_get_contents("file.txt");
+5.feof()
+while(!feof($handle)) {
+    $line = fgets($handle);
+    echo $line;
+}
+6.fclose()
+fclose($handle);
 
+INPUT
+<?php
+$handle = fopen("sample.txt", "r");
+if ($handle) {
+    while (!feof($handle)) {
+        $line = fgets($handle);
+        echo $line . "<br>";
+    }
+    fclose($handle);
+} else {
+    echo "Unable to open file!";
+}
+?>
+
+
+PHP File Writing Functions
+1.fopen()
+$handle = fopen("file.txt", "w");
+2.fwrite()
+fwrite($handle, "Hello World\n");
+3.file_put_contents()
+file_put_contents("file.txt", "Hello World\n");
+4.fclose()
+fclose($handle);
+
+INPUT
+<?php
+$handle = fopen("sample.txt", "w");
+if ($handle) {
+    fwrite($handle, "This is a line of text.\n");
+    fwrite($handle, "This is another line.\n");
+    fclose($handle);
+    echo "File written successfully.";
+} else {
+    echo "Unable to open file!";
+}
+?>
