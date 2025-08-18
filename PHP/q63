@@ -1,1 +1,22 @@
+63. Discover a function that takes an array of numbers as input and returns the sum of all the even numbers in the array.
+ANSWER
+<?php
+function sumOfEvenNumbers($numbers) {
+    $sum = 0;
 
+    foreach ($numbers as $num) {
+        if ($num % 2 == 0) {
+            $sum += $num;
+        }
+    }
+
+    return $sum;
+}
+// Example usage
+$inputArray = [1, 2, 3, 4, 5, 6, 7, 8];
+$evenSum = sumOfEvenNumbers($inputArray);
+echo "Sum of even numbers: " . $evenSum;
+?>
+
+OUTPUT
+Sum of even numbers: 20
