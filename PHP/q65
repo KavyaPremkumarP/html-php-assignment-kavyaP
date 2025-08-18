@@ -1,1 +1,17 @@
+65. Demonstrate PHP script that checks if a string contains another string and displays the result.
+ANSWER
+<?php
+// Main string
+$mainString = "The quick brown fox jumps over the lazy dog.";
+// Substring to search for
+$searchString = "fox";
+// Check if the substring exists in the main string
+if (strpos($mainString, $searchString) !== false) {
+    echo "✅ The string contains '$searchString'.";
+} else {
+    echo "❌ The string does NOT contain '$searchString'.";
+}
+?>
 
+OUTPUT
+The string contains 'fox'.
