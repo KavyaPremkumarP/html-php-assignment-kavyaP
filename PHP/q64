@@ -1,1 +1,60 @@
+64. A retail company wants to forecast future sales based on historical data. Develop a system that utilizes numerical types, mathematical operators to analyze sales trends, calculate growth rates, and generate
+sales forecasts using arrays in php.
+ANSWER
+<?php
+// Historical monthly sales data (e.g., last 6 months)
+$salesData = [12000, 12500, 13000, 13500, 14000, 14500];
+// Step 1: Calculate monthly growth rates
+$growthRates = [];
+for ($i = 1; $i < count($salesData); $i++) {
+    $growth = (($salesData[$i] - $salesData[$i - 1]) / $salesData[$i - 1]) * 100;
+    $growthRates[] = $growth;
+}
+// Step 2: Calculate average growth rate
+$averageGrowthRate = array_sum($growthRates) / count($growthRates);
+// Step 3: Forecast sales for the next N months using average growth
+$monthsToForecast = 3;
+$lastMonthSales = end($salesData);
+$forecast = [];
+for ($i = 0; $i < $monthsToForecast; $i++) {
+    $nextSales = $lastMonthSales + ($lastMonthSales * ($averageGrowthRate / 100));
+    $forecast[] = round($nextSales, 2);
+    $lastMonthSales = $nextSales; // update for next month
+}
+// Output results
+echo "📈 Historical Sales Data:\n";
+print_r($salesData);
+echo "\n📊 Monthly Growth Rates (%):\n";
+foreach ($growthRates as $i => $rate) {
+    echo "Month " . ($i + 2) . ": " . round($rate, 2) . "%\n";
+}
+echo "\n📐 Average Monthly Growth Rate: " . round($averageGrowthRate, 2) . "%\n";
+echo "\n🔮 Forecast for Next $monthsToForecast Months:\n";
+foreach ($forecast as $i => $value) {
+    echo "Month " . ($i + 1) . ": $" . number_format($value, 2) . "\n";
+}
+?>
+
+OUTPUT
+📈 Historical Sales Data:
+Array
+(
+    [0] => 12000
+    [1] => 12500
+    [2] => 13000
+    [3] => 13500
+    [4] => 14000
+    [5] => 14500
+)
+📊 Monthly Growth Rates (%):
+Month 2: 4.17%
+Month 3: 4%
+Month 4: 3.85%
+Month 5: 3.7%
+Month 6: 3.57%
+📐 Average Monthly Growth Rate: 3.86%
+🔮 Forecast for Next 3 Months:
+Month 1: $15,059.35
+Month 2: $15,640.28
+Month 3: $16,243.62
 
