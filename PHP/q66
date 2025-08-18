@@ -1,1 +1,38 @@
+66. Difference between count() and sizeof() function in PHP.
+ANSWER
+ Point-wise Comparison of count() vs sizeof()
+Functionality
+Both functions return the number of elements in an array.
+
+Definition
+sizeof() is simply an alias of count() in PHP.
+
+Usage Preference
+count() is more commonly used and preferred for clarity and readability.
+
+Performance
+There is no performance difference between the two. They work identically.
+
+Syntax
+Both use the same syntax:
+count($array);  
+sizeof($array);
+
+
+Data Types
+Both work primarily with arrays, but can also count elements in objects that implement Countable.
+
+Best Practice
+Use count() as it's standard and more recognizable in PHP coding.
+
+INPUT
+<?php
+$data = ["PHP", "Java", "Python"];
+echo "Using count(): " . count($data) . "\n";
+echo "Using sizeof(): " . sizeof($data) . "\n";
+?>
+OUTPUT
+Using count(): 3
+Using sizeof(): 3
+
 
