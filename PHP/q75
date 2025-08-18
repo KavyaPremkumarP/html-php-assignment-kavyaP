@@ -1,1 +1,21 @@
+75. Build a PHP function that takes the filename and a new line of content as input. Append the new
+line of content as a new line at the end of the file.
+ANSWER
+<?php
+function appendLineToFile($filename, $newContent) {
+    // Add a newline character at the beginning (if needed)
+    $line = PHP_EOL . $newContent;
 
+    // Use file_put_contents with FILE_APPEND flag
+    if (file_put_contents($filename, $line, FILE_APPEND | LOCK_EX)) {
+        echo "Line successfully appended to '$filename'.";
+    } else {
+        echo "Failed to write to file.";
+    }
+}
+// Example usage
+appendLineToFile("example.txt", "This is a new line added at the end.");
+?>
+
+OUTPUT
+Line successfully appended to 'example.txt'.
