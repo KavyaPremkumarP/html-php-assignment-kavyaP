@@ -1,1 +1,19 @@
+96. How to register a variable in a PHP session? Give an example.
+ANSWER
+Explanation:
+ 1.To register a variable in a PHP session, you need to:
+ 2.Start the session using session_start().
+ 3.Assign a value to an element of the $_SESSION superglobal array.
 
+EXAMPLE
+<?php
+// Start the session
+session_start();
+// Register a variable in the session
+$_SESSION['username'] = "Kavya";
+// Display the stored session variable
+echo "Username stored in session is: " . $_SESSION['username'];
+?>
+
+OUTPUT
+Username stored in session is: Kavya
