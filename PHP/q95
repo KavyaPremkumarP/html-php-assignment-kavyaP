@@ -1,1 +1,95 @@
+95. Discuss the purpose and functionality of PHP sessions and outline their potential application in maintaining a user's shopping cart state across multiple pages.
+ANSWER
+Purpose of PHP Sessions
+ PHP sessions are used to store user-specific data on the server, allowing you to maintain state across multiple pages (HTTP is stateless by default).
+They help:
+ Track user activity (e.g. login status)
+ Store temporary data (e.g. shopping cart, form data)
+ Maintain state during a browsing session
 
+Functionality of PHP Sessions
+
+1.Session Start
+  Use session_start() to begin or resume a session. It must be the first thing on the page:
+Eg:session_start();
+
+2.Storing Data
+ Session variables are stored in the $_SESSION superglobal array:
+Eg:$_SESSION['username'] = 'Alice';
+
+3.Accessing Data
+ On any other page (after session_start()), you can access:
+Eg:echo $_SESSION['username']; // Output: Alice
+
+4.Ending a Session
+ To clear or destroy a session:
+Eg: session_unset();    // Remove all session variables
+    session_destroy();  // Destroy the session
+
+Using PHP Sessions to Maintain a Shopping Cart
+<?php
+session_start();
+// Handle add to cart
+if (isset($_GET['add'])) {
+    $product = $_GET['add'];
+
+    // Initialize cart if not set
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+   // Add product to the cart
+    $_SESSION['cart'][] = $product;
+    $message = "$product has been added to your cart.";
+}
+// Handle clear cart
+if (isset($_GET['clear'])) {
+    unset($_SESSION['cart']);
+    $message = "Cart has been cleared.";
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHP Shopping Cart with Sessions</title>
+</head>
+<body>
+    <h1>Simple PHP Shopping Cart</h1>
+     <!-- Display Message -->
+    <?php if (isset($message)): ?>
+        <p><strong><?php echo htmlspecialchars($message); ?></strong></p>
+    <?php endif; ?>
+
+    <!-- Product List -->
+    <h3>Products:</h3>
+    <ul>
+        <li><a href="?add=Apple">Add Apple</a></li>
+        <li><a href="?add=Banana">Add Banana</a></li>
+        <li><a href="?add=Orange">Add Orange</a></li>
+    </ul>
+    <!-- View Cart -->
+    <h3>Your Shopping Cart:</h3>
+    <?php if (!empty($_SESSION['cart'])): ?>
+        <ul>
+            <?php foreach ($_SESSION['cart'] as $item): ?>
+                <li><?php echo htmlspecialchars($item); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <p>Your cart is empty.</p>
+    <?php endif; ?>
+
+    <!-- Clear Cart Link -->
+    <p><a href="?clear=1">Clear Cart</a></p>
+
+</body>
+</html>
+
+OUTPUT
+Simple PHP Shopping Cart
+Products:
+Add Apple
+Add Banana
+Add Orange
+Your Shopping Cart:
+Your cart is empty.
+Clear Cart
