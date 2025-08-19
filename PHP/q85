@@ -1,1 +1,38 @@
+85. List the steps to get file name from a path in PHP.
 
+ANSWER
+Step-by-Step Process
+ 1.Have the full file path
+ 2.Use basename() function
+  This built-in function returns the trailing file name from a path.
+ 3.Use pathinfo() to extract just the name (without extension)
+  This function returns an associative array with components of the path.
+ 4.Extract only the file name (without extension)
+  From the array returned by pathinfo(), use:
+ 5.Extract the file extension (if needed)
+
+<?php
+// Step 1: Define the full file path
+$path = "/var/www/html/uploads/document.pdf";
+// Step 2: Get file name with extension
+$filename = basename($path); // Output: document.pdf
+// Step 3: Use pathinfo() to get detailed info
+$fileInfo = pathinfo($path);
+// Step 4: Extract components
+$nameOnly = $fileInfo['filename'];     // document
+$extension = $fileInfo['extension'];   // pdf
+$directory = $fileInfo['dirname'];     // /var/www/html/uploads
+// Step 5: Display the results
+echo "Full Path: " . $path . "\n";
+echo "File Name (with extension): " . $filename . "\n";
+echo "File Name (without extension): " . $nameOnly . "\n";
+echo "File Extension: " . $extension . "\n";
+echo "Directory Name: " . $directory . "\n";
+?>
+
+OUTPUT
+Full Path: /var/www/html/uploads/document.pdf
+File Name (with extension): document.pdf
+File Name (without extension): document
+File Extension: pdf
+Directory Name: /var/www/html/uploads
