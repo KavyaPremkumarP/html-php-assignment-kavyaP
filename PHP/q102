@@ -1,1 +1,45 @@
+102. Develop a PHP program to use session variables and start a session.
+
+ANSWER
+<?php
+// Start or resume the session
+session_start();
+
+// Initialize or increment session variable
+if (!isset($_SESSION['visit_count'])) {
+    $_SESSION['visit_count'] = 1;
+    $message = "Welcome! This is your first visit in this session.";
+} else {
+    $_SESSION['visit_count']++;
+    $message = "You have visited this page <strong>{$_SESSION['visit_count']}</strong> times in this session.";
+}
+
+// Set another session variable
+$_SESSION['username'] = "JohnDoe"; // Example session variable
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHP Session Demo</title>
+</head>
+<body>
+
+    <h2>📘 PHP Session Example</h2>
+
+    <p><?php echo $message; ?></p>
+    <p>Session Username: <?php echo $_SESSION['username']; ?></p>
+
+    <form method="post">
+        <button type="submit">Reload Page</button>
+    </form>
+
+</body>
+</html>
+
+OUTPUT
+PHP Session Example
+You have visited this page 2 times in this session.
+Session Username: JohnDoe
+Reload Page
 
