@@ -1,1 +1,25 @@
+88. Generate a simple PHP 'birthday countdown' script, the script will count the number of days between current day and birthday.
 
+ANSWER
+<?php
+// Set your birthday (month and day)
+$birthdayMonth = 12;
+$birthdayDay = 25;
+// Get current date
+$today = new DateTime();
+// Create a DateTime object for birthday this year
+$currentYear = (int)$today->format('Y');
+$birthdayThisYear = DateTime::createFromFormat('Y-m-d', "$currentYear-$birthdayMonth-$birthdayDay");
+// If birthday has already passed this year, set birthday to next year
+if ($birthdayThisYear < $today) {
+    $birthdayThisYear->modify('+1 year');
+}
+// Calculate difference
+$interval = $today->diff($birthdayThisYear);
+$daysLeft = $interval->days;
+
+echo "Days left until birthday: $daysLeft";
+?>
+
+OUTPUT
+Days left until birthday: 127
