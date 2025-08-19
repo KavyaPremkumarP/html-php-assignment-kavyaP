@@ -1,1 +1,28 @@
+92. Apply the various steps involved to get cookie value using server-side scripting.
 
+Steps to Get Cookie Value in PHP
+Step 1: Set the Cookie (Usually in a previous request)
+Before you can get a cookie, it must be set first:
+Eg:// Set a cookie named "username"
+      setcookie("username", "Alice", time() + 3600, "/");
+     "username" = name of the cookie
+     "Alice" = value
+     time() + 3600 = expires in 1 hour
+     "/" = available across the whole domain
+
+Step 2: Access Cookie Value (In a subsequent request)
+Once the cookie is set and the browser sends it back in the next request, you can read it using $_COOKIE:
+Eg: if (isset($_COOKIE['username'])) {
+    echo "Welcome back, " . $_COOKIE['username'];
+    } else {
+    echo "Welcome, guest!";
+   }
+
+Step 3: Validate or Use the Cookie Data
+Always validate cookie data before using it to prevent security issues:
+Eg: $user = htmlspecialchars($_COOKIE['username'] ?? 'Guest');
+    echo "Hello, $user!";
+
+Step 4: Delete a Cookie
+You can delete a cookie by setting its expiration time in the past:
+Eg:setcookie("username", "", time() - 3600, "/");
