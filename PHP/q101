@@ -1,1 +1,39 @@
+101. Identify, how a cookie’s value can be retrieved in a web application?
+
+ANSWER
+<?php
+// Set the cookie if it's not already set
+if (!isset($_COOKIE['user'])) {
+    // Set a cookie named 'user' with value 'John' that expires in 1 hour
+    setcookie("user", "John", time() + 3600, "/"); // "/" means it's available across the whole domain
+    $cookie_message = "✅ Cookie 'user' has been set. Please reload the page to see its value.";
+} else {
+    // Retrieve the cookie value
+    $cookie_value = $_COOKIE['user'];
+    $cookie_message = "✅ Cookie 'user' is set. Value: <strong>$cookie_value</strong>";
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Set and Retrieve Cookie in PHP</title>
+</head>
+<body>
+
+    <h2>🍪 Cookie Demo</h2>
+
+    <p><?php echo $cookie_message; ?></p>
+
+    <form method="post">
+        <button type="submit">Reload Page</button>
+    </form>
+
+</body>
+</html>
+
+OUTPUT
+Cookie Demo
+Cookie 'user' has been set. Please reload the page to see its value.
+Reload Page
 
