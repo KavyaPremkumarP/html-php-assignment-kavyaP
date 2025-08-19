@@ -1,1 +1,104 @@
+94. Evaluate the different file handling modes available in PHP with appropriate examples.
+
+ANSWER
+<?php
+echo "<h2>PHP File Handling Mode Examples</h2>";
+
+// 1. 'r' – Read only
+echo "<h3>1. Mode: 'r'</h3>";
+$handle = fopen("example.txt", "r");
+if ($handle) {
+    echo fread($handle, filesize("example.txt"));
+    fclose($handle);
+} else {
+    echo "File doesn't exist for reading.";
+}
+
+// 2. 'r+' – Read and write
+echo "<h3>2. Mode: 'r+'</h3>";
+$handle = fopen("example.txt", "r+");
+if ($handle) {
+    fwrite($handle, "Updated text.\n");
+    rewind($handle);
+    echo fread($handle, filesize("example.txt"));
+    fclose($handle);
+} else {
+    echo "File doesn't exist for reading/writing.";
+}
+
+// 3. 'w' – Write only (overwrite)
+echo "<h3>3. Mode: 'w'</h3>";
+$handle = fopen("writefile.txt", "w");
+fwrite($handle, "This is written with 'w' mode.\n");
+fclose($handle);
+echo "Data written using 'w' mode.";
+
+// 4. 'w+' – Read and write (overwrite)
+echo "<h3>4. Mode: 'w+'</h3>";
+$handle = fopen("writefile2.txt", "w+");
+fwrite($handle, "Text in w+ mode.\n");
+rewind($handle);
+echo fread($handle, 100);
+fclose($handle);
+
+// 5. 'a' – Append only
+echo "<h3>5. Mode: 'a'</h3>";
+$handle = fopen("appendfile.txt", "a");
+fwrite($handle, "Appending a line using 'a' mode.\n");
+fclose($handle);
+echo "Data appended using 'a' mode.";
+
+// 6. 'a+' – Read and append
+echo "<h3>6. Mode: 'a+'</h3>";
+$handle = fopen("appendfile2.txt", "a+");
+fwrite($handle, "Appending with 'a+' mode.\n");
+rewind($handle);
+echo fread($handle, 200);
+fclose($handle);
+
+// 7. 'x' – Create new file, write only
+echo "<h3>7. Mode: 'x'</h3>";
+$filename = "newfile.txt";
+if (!file_exists($filename)) {
+    $handle = fopen($filename, "x");
+    fwrite($handle, "File created using 'x' mode.\n");
+    fclose($handle);
+    echo "File '$filename' created successfully.";
+} else {
+    echo "File '$filename' already exists.";
+}
+
+// 8. 'x+' – Create new file, read and write
+echo "<h3>8. Mode: 'x+'</h3>";
+$filename = "newfile2.txt";
+if (!file_exists($filename)) {
+    $handle = fopen($filename, "x+");
+    fwrite($handle, "Data for x+ mode.\n");
+    rewind($handle);
+    echo fread($handle, 100);
+    fclose($handle);
+} else {
+    echo "File '$filename' already exists.";
+}
+
+?>
+
+OUTPUT
+PHP File Handling Mode Examples
+1. Mode: 'r'
+This is a new line added at the end.
+2. Mode: 'r+'
+Updated text. w line added at the end.
+3. Mode: 'w'
+Data written using 'w' mode.
+4. Mode: 'w+'
+Text in w+ mode.
+5. Mode: 'a'
+Data appended using 'a' mode.
+6. Mode: 'a+'
+Appending with 'a+' mode.
+7. Mode: 'x'
+File 'newfile.txt' created successfully.
+8. Mode: 'x+'
+Data for x+ mode.
 
