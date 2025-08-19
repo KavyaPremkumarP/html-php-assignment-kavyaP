@@ -1,1 +1,74 @@
+86. PHP File functions with example program.
+ANSWER
+PHP File Functions
+1.fopen(filename, mode)
+ Opens a file in a specified mode (e.g., read, write).
+ Returns a file handle/resource.
 
+2.fwrite(handle, string)
+ Writes a string to an open file.
+
+3.fread(handle, length)
+ Reads a specified number of bytes from an open file.
+
+4.fclose(handle)
+ Closes an open file handle.
+
+5.file_get_contents(filename)
+ Reads the entire file content into a string.
+
+6.file_put_contents(filename, data)
+ Writes data to a file (creates or overwrites).
+
+7.file_exists(filename)
+ Checks whether a file or directory exists. Returns true or false.
+
+8.filesize(filename)
+ Returns the size of a file in bytes.
+
+9.unlink(filename)
+Deletes a file. 
+
+10.is_readable(filename)
+Checks if the file is readable.
+
+11.is_writable(filename)
+Checks if the file is writable.
+
+<?php
+$filename = "testfile.txt";
+$content = "This is a test file created using PHP file functions.";
+
+// 1. Create and write content to the file
+file_put_contents($filename, $content);
+echo "File '$filename' created and written.<br>";
+// 2. Check if file exists
+if (file_exists($filename)) {
+    echo "File exists.<br>";
+    // 3. Read the content of the file
+    $data = file_get_contents($filename);
+    echo "File content: " . $data . "<br>";
+    // 4. Get the file size
+    echo "File size: " . filesize($filename) . " bytes<br>";
+    // 5. Check if the file is readable and writable
+    echo "Is readable? " . (is_readable($filename) ? "Yes" : "No") . "<br>";
+    echo "Is writable? " . (is_writable($filename) ? "Yes" : "No") . "<br>";
+   // 6. Delete the file
+    if (unlink($filename)) {
+        echo "File deleted successfully.";
+    } else {
+        echo "Failed to delete the file.";
+    }
+} else {
+    echo "File does not exist.";
+}
+?>
+
+OUTPUT
+File 'testfile.txt' created and written.
+File exists.
+File content: This is a test file created using PHP file functions.
+File size: 53 bytes
+Is readable? Yes
+Is writable? Yes
+File deleted successfully.
