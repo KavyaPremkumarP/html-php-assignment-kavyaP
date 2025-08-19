@@ -1,1 +1,53 @@
+100. Using PHP, construct a program to restrict the user from uploading the same file again and again. If the same file already exists in that folder, display an appropriate error message.
+ANSWER
+<?php
+// Folder to store uploads
+$uploadDir = "uploads/";
 
+// Create the upload directory if it doesn't exist
+if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0777, true);
+}
+
+$uploadMessage = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['user_file'])) {
+    $fileName = basename($_FILES['user_file']['name']);
+    $targetPath = $uploadDir . $fileName;
+
+    // Check if file already exists
+    if (file_exists($targetPath)) {
+        $uploadMessage = "❌ Error: File <strong>$fileName</strong> already exists. Upload denied.";
+    } else {
+        // Move the uploaded file to the target folder
+        if (move_uploaded_file($_FILES['user_file']['tmp_name'], $targetPath)) {
+            $uploadMessage = "✅ File <strong>$fileName</strong> uploaded successfully.";
+        } else {
+            $uploadMessage = "❌ Error: Upload failed. Please try again.";
+        }
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prevent Duplicate File Uploads - PHP</title>
+</head>
+<body>
+
+    <h2>📁 Upload a File</h2>
+
+    <!-- Show upload status -->
+    <?php if (!empty($uploadMessage)) : ?>
+        <p><?php echo $uploadMessage; ?></p>
+    <?php endif; ?>
+
+    <form method="post" enctype="multipart/form-data">
+        <label>Select file:</label><br><br>
+        <input type="file" name="user_file" required><br><br>
+        <button type="submit">Upload File</button>
+    </form>
+
+</body>
+</html>
