@@ -1,1 +1,33 @@
+91. Recognize how sessions are stored in PHP?
+ANSWER
+1. Session Initialization
+ You start a session using:
+ SYNTAX:session_start();
+ This checks if a session already exists. If not, it:
+ Generates a unique session ID.
+ Sends it to the user's browser via a cookie (default: PHPSESSID).
 
+2. Session Storage (Server-Side)
+ By default, PHP stores session data as files on the server.
+ Each session is stored in a file on the server, usually in:
+ Linux: /var/lib/php/sessions/ or /tmp/
+ Windows: Defined in php.ini
+ File names are like:sess_abc1234567890xyz
+ Contents are serialized data structures (arrays, strings, etc.)
+
+3. Session ID (Client-Side)
+ The session ID is stored on the client side (browser) in a cookie:
+ Set-Cookie: PHPSESSID=abc1234567890xyz; path=/; httponly
+ This ID is sent with each request so the server can load the corresponding session file.
+
+4. Custom Session Handlers (Optional)
+ Instead of files, sessions can be stored in:
+ Database (MySQL, PostgreSQL, etc.)
+ Memory stores like Redis or Memcached
+ Custom storage via session_set_save_handler()
+
+5. Session Configuration
+ Session behavior can be controlled via php.ini or ini_set():
+ session.save_path → Directory for session files
+ session.gc_maxlifetime → Session expiration time
+ session.name → Name of the session ID cookie
