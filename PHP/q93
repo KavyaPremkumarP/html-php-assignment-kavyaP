@@ -1,1 +1,31 @@
+93. Write a PHP program that keeps track of how many times a visitor has loaded the page.
 
+ANSWER
+<?php
+// Check if the 'visits' cookie is set
+if (isset($_COOKIE['visits'])) {
+    // If it exists, increment its value
+    $visits = $_COOKIE['visits'] + 1;
+} else {
+    // If not set, start at 1
+    $visits = 1;
+}
+// Set or update the 'visits' cookie (expires in 1 hour)
+setcookie('visits', $visits, time() + 3600);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Visit Counter</title>
+</head>
+<body>
+    <h1>
+        <?php
+        echo "You have visited this page $visits time(s).";
+        ?>
+    </h1>
+</body>
+</html>
+
+OUTPUT
+You have visited this page 1 time(s).
