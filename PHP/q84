@@ -1,1 +1,61 @@
+84. Implement a PHP program that creates sessions, sets values in sessions, and removes data from
+the sessions.
 
+ANSWER
+<?php
+// Start the session
+session_start();
+
+// Handle session actions based on query parameters
+if (isset($_GET['action'])) {
+    if ($_GET['action'] == 'set') {
+        // Set session variables
+        $_SESSION['username'] = 'john_doe';
+        $_SESSION['email'] = 'john@example.com';
+    }
+
+    if ($_GET['action'] == 'unset') {
+        // Remove specific session variable
+        unset($_SESSION['email']);
+    }
+
+    if ($_GET['action'] == 'destroy') {
+        // Destroy the session
+        session_unset(); // Unset all session variables
+        session_destroy(); // Destroy the session
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHP Session Example</title>
+</head>
+<body>
+    <h2>PHP Session Example</h2>
+
+    <p><a href="?action=set">Set Session Variables</a></p>
+    <p><a href="?action=unset">Unset 'email' Session Variable</a></p>
+    <p><a href="?action=destroy">Destroy Session</a></p>
+
+    <h3>Current Session Data:</h3>
+    <pre>
+<?php
+if (!empty($_SESSION)) {
+    print_r($_SESSION);
+} else {
+    echo "No session data available.";
+}
+?>
+    </pre>
+</body>
+</html>
+
+OUTPUT
+PHP Session Example
+Set Session Variables
+Unset 'email' Session Variable
+Destroy Session
+Current Session Data:
+No session data available.  
