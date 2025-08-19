@@ -1,1 +1,104 @@
+99. Build a PHP program to apply the following tasks using session.
+(a) Initiate a session (or pick up an existing one).
+(b) Check for the existence of a pre-existing entry in $_SESSION. If not present, assume
+that the session is new.
+(c) Increment a counter that tracks how many times that the user has visited this page.
+(d) Store the incremented counter back in $_SESSION.
+(e) Provide a link back to the page itself, embedding the session ID as an argument if it is
+found.
+(f) Using PHP, construct a program to restrict the user from uploading the same file again
+and again. If the same file already exists in that folder, display an appropriate error
+message.
+
+ANSWER
+<?php
+// (a) Start session
+session_start();
+
+// (b) Check if visit counter exists
+if (!isset($_SESSION['visit_count'])) {
+    $_SESSION['visit_count'] = 1;
+    $is_new_session = true;
+} else {
+    // (c) Increment visit counter
+    $_SESSION['visit_count']++;
+    $is_new_session = false;
+}
+
+// (d) The counter is already stored in $_SESSION from the steps above
+
+// Define upload directory
+$uploadDir = "uploads/";
+
+// Create the directory if it doesn't exist
+if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0777, true);
+}
+
+// File upload status
+$uploadStatus = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
+    $fileName = basename($_FILES['file']['name']);
+    $targetFile = $uploadDir . $fileName;
+
+    // (f) Check if file already exists
+    if (file_exists($targetFile)) {
+        $uploadStatus = "❌ Error: The file <strong>$fileName</strong> already exists.";
+    } else {
+        if (move_uploaded_file($_FILES['file']['tmp_name'], $targetFile)) {
+            $uploadStatus = "✅ File <strong>$fileName</strong> uploaded successfully.";
+        } else {
+            $uploadStatus = "❌ Error uploading file.";
+        }
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Session & File Upload Tracker</title>
+</head>
+<body>
+
+    <h2>🔁 Page Visit Counter</h2>
+    <p>
+        <?php
+            if ($is_new_session) {
+                echo "New session started.";
+            } else {
+                echo "You have visited this page <strong>{$_SESSION['visit_count']}</strong> times.";
+            }
+        ?>
+    </p>
+
+    <!-- (e) Link back to this page with session ID (only shown if SID is defined) -->
+    <p><a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . '?' . SID; ?>">Reload This Page (with session ID)</a></p>
+
+    <hr>
+
+    <h2>📤 File Upload</h2>
+    <?php if ($uploadStatus): ?>
+        <p><?php echo $uploadStatus; ?></p>
+    <?php endif; ?>
+
+    <form method="post" enctype="multipart/form-data">
+        <label>Select a file to upload:</label><br><br>
+        <input type="file" name="file" required><br><br>
+        <button type="submit">Upload File</button>
+    </form>
+
+</body>
+</html>
+
+OUTPUT
+🔁 Page Visit Counter
+New session started.
+Reload This Page (with session ID)
+
+📤 File Upload
+Select a file to upload:
+No file chosen
+Upload File
 
