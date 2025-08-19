@@ -1,1 +1,28 @@
+104. Formulate a PHP program to open a text file and print the nth line in the text file if then'th line
+does not exist print 'no data'.
+
+ANSWER
+<?php
+// Define the file path and the line number to fetch
+$filename = "sample.txt";  // Make sure this file exists in the same folder
+$n = 3; // For example: print the 3rd line (change as needed)
+
+// Check if the file exists
+if (file_exists($filename)) {
+    // Read all lines into an array
+    $lines = file($filename, FILE_IGNORE_NEW_LINES);
+
+    // Check if the n-th line exists (array index is n-1)
+    if (isset($lines[$n - 1])) {
+        echo "Line $n: " . htmlspecialchars($lines[$n - 1]);
+    } else {
+        echo "no data";
+    }
+} else {
+    echo "File not found.";
+}
+?>
+
+OUTPUT
+File not found.
 
